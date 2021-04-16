@@ -1,3 +1,12 @@
+#main-container {
+  height: calc(100vh - 40px - 1rem);
+  box-sizing: border-box; }
 
+#main-container .column-sm {
+  width: 100%; }
+
+#main-container .container-row {
+  padding-left: 1rem;
+  padding-right: 1rem; }
 
 /*# sourceMappingURL=main.css.map */
