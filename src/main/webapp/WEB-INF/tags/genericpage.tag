@@ -17,9 +17,10 @@
 <body>
 
 <div class="container" id="main-container">
+
     <div class="row">
         <div class="column-sm" id="header-row">
-            <div id="pageheader">
+            <div class="container-row" id="pageheader">
                 <jsp:invoke fragment="header"/>
             </div>
         </div>
@@ -27,7 +28,7 @@
 
     <div class="row">
         <div class="column-sm" id="body-row">
-            <div id="body">
+            <div class="container-row" id="body">
                 <jsp:doBody/>
             </div>
         </div>
@@ -35,7 +36,7 @@
 
     <div class="row">
         <div class="column-sm" id="footer-row">
-            <div id="pagefooter">
+            <div class="container-row" id="pagefooter">
                 <jsp:invoke fragment="footer"/>
             </div>
         </div>

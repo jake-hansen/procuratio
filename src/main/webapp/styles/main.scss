@@ -1,10 +1,33 @@
 $navbar-height: 40px;
 $navbar-vertical-padding: 1rem;
+$container-row-width: 100%;
 
 #navbar {
 }
 
 #main-container {
+
   height: calc(100vh - #{$navbar-height} - #{$navbar-vertical-padding});
   box-sizing: border-box;
+}
+
+#main-container .column-sm {
+  width: $container-row-width;
+}
+
+#main-container .container-row {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+#header-row {
+
+}
+
+#body-row {
+
+}
+
+#footer-row {
+
 }

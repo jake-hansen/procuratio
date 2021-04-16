@@ -4,10 +4,12 @@
 
 <t:genericpage title="Home">
     <jsp:attribute name="header">
+        <h1 style="text-align: center"> Welcome, {username}</h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
+        <p>footer</p>
     </jsp:attribute>
     <jsp:body>
-        <h1 style="text-align: center"> Welcome, {username}</h1>
+        <p>body</p>
     </jsp:body>
 </t:genericpage>
