@@ -103,3 +103,4 @@ https://github.com/github/gitignore/blob/master/Sass.gitignore
 *.sass.map
 *.scss.map
 
+/target
