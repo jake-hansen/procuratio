@@ -1,0 +1,10 @@
+$navbar-height: 40px;
+$navbar-vertical-padding: 1rem;
+
+#navbar {
+}
+
+#main-container {
+  height: calc(100vh - #{$navbar-height} - #{$navbar-vertical-padding});
+  box-sizing: border-box;
+}

@@ -104,3 +104,4 @@ https://github.com/github/gitignore/blob/master/Sass.gitignore
 *.scss.map
 
 /target
+*.iml

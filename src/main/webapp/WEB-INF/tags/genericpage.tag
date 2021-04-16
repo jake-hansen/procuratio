@@ -15,14 +15,32 @@
     <jsp:include page="../../layouts/navbar.html" />
 </head>
 <body>
-<div id="pageheader">
-    <jsp:invoke fragment="header"/>
+
+<div class="container" id="main-container">
+    <div class="row">
+        <div class="column-sm" id="header-row">
+            <div id="pageheader">
+                <jsp:invoke fragment="header"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column-sm" id="body-row">
+            <div id="body">
+                <jsp:doBody/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column-sm" id="footer-row">
+            <div id="pagefooter">
+                <jsp:invoke fragment="footer"/>
+            </div>
+        </div>
+    </div>
 </div>
-<div id="body">
-    <jsp:doBody/>
-</div>
-<div id="pagefooter">
-    <jsp:invoke fragment="footer"/>
-</div>
+
 </body>
 </html>

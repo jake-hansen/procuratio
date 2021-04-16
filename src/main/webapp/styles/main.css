@@ -1,3 +1,5 @@
-
+#main-container {
+  height: calc(100vh - 40px - 1rem);
+  box-sizing: border-box; }
 
 /*# sourceMappingURL=main.css.map */
