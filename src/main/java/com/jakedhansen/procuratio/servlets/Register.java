@@ -11,6 +11,11 @@ import java.io.IOException;
 
 @WebServlet(name = "Register", value = "/register")
 public class Register extends HttpServlet {
+    public enum Status {
+        SUCCESSFUL,
+        DUPLICATE_USER,
+        FAILURE
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,13 +32,15 @@ public class Register extends HttpServlet {
 
         NewUser newUser = new NewUser(firstname, lastname, username, email, password);
 
+        HttpSession session = request.getSession();
+
         try {
             User registeredUser = UserService.Register(newUser);
+            session.setAttribute("register_status", Status.SUCCESSFUL);
 
             response.sendRedirect("register.jsp");
         } catch (Exception e) {
-            HttpSession session = request.getSession();
-
+            session.setAttribute("register_status", Status.FAILURE);
             session.setAttribute("register_firstname", newUser.getFirstName());
             session.setAttribute("register_lastname", newUser.getLastName());
             session.setAttribute("register_username", newUser.getUsername());

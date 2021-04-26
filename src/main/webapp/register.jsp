@@ -1,6 +1,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.jakedhansen.procuratio.servlets.Register.Status"%>
 
 
 <t:genericpage title="Register">
@@ -48,8 +49,17 @@
             <div class="row">
                 <div class="col">
                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                    <c:if test="${not empty sessionScope.register_status}">
+                        <c:if test="${sessionScope.register_status eq 'SUCCESSFUL'}">
+                            <p class="text-success">Successfully registered</p>
+                        </c:if>
+                        <c:if test="${sessionScope.register_status eq 'FAILURE'}">
+                            <p class="text-danger">Failed to register</p>
+                        </c:if>
+                    </c:if>
                 </div>
             </div>
         </form>
+
     </jsp:body>
 </t:genericpage>
