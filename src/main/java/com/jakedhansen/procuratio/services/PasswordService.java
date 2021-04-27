@@ -15,6 +15,10 @@ public class PasswordService {
         return BCrypt.hashpw(plaintextPassword, BCrypt.gensalt());
     }
 
+    public static boolean checkPassword(String plaintextPassword, String hashedPassword) {
+        return BCrypt.checkpw(plaintextPassword, hashedPassword);
+    }
+
     private static void validatePasswordRequirements(String password) throws PasswordRequirementsNotMetException {
         if (password.equals("")) {
             throw new PasswordRequirementsNotMetException("blank password not allowed");

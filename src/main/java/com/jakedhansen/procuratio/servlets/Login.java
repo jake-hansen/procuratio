@@ -34,13 +34,22 @@ public class Login extends HttpServlet {
         try {
             User registeredUser = UserService.Login(credentials);
             session.setAttribute("login_status", Status.SUCCESSFUL);
+            session.setAttribute("user", registeredUser);
 
             response.sendRedirect("index.jsp");
-        } catch (Exception e) {
-            session.setAttribute("login_status", Status.FAILURE);
-            session.setAttribute("login_username", credentials.getUsername());
-
+        } catch (UserService.IncorrectPasswordException i) {
+            setFailure(session, credentials, Status.BAD_PASSWORD);
             response.sendRedirect("login.jsp");
         }
+        catch (Exception e) {
+            e.printStackTrace();
+            setFailure(session, credentials, Status.FAILURE);
+            response.sendRedirect("login.jsp");
+        }
+    }
+
+    private void setFailure(HttpSession session, Credentials credentials, Status status) {
+        session.setAttribute("login_status", status);
+        session.setAttribute("login_username", credentials.getUsername());
     }
 }
