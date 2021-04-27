@@ -18,11 +18,6 @@
                     <label for="firstname" class="form-label">First Name</label>
                     <input type="text" class="form-control" id="firstname" name="firstname" value="<c:out value="${sessionScope.register_firstname}"/>"/>
                 </div>
-                <ul>
-                    <c:forEach items="${requestScope}" var="p">
-                        <li>${p.key} -> ${p.value}</li>
-                    </c:forEach>
-                </ul>
                 <div class = "col">
                     <label for="lastname" class="form-label">Last Name</label>
                     <input type="text" class="form-control" id="lastname" name="lastname" value="<c:out value="${sessionScope.register_lastname}"/>">
@@ -56,6 +51,13 @@
                         <c:if test="${sessionScope.register_status eq 'FAILURE'}">
                             <p class="text-danger">Failed to register</p>
                         </c:if>
+                        <c:if test="${sessionScope.register_status eq 'DUPLICATE_USER'}">
+                            <p class="text-warning">Username already taken</p>
+                        </c:if>
+                        <c:if test="${sessionScope.register_status eq 'PASSWORD_REQUIREMENTS'}">
+                            <p class="text-warning">Password requirements not met</p>
+                        </c:if>
+                        <c:remove var="register_status" scope="session"/>
                     </c:if>
                 </div>
             </div>
