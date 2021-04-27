@@ -2,6 +2,7 @@ package com.jakedhansen.procuratio.servlets;
 
 import com.jakedhansen.procuratio.domain.User;
 import com.jakedhansen.procuratio.dto.NewUser;
+import com.jakedhansen.procuratio.services.PasswordService;
 import com.jakedhansen.procuratio.services.UserService;
 
 import javax.servlet.*;
@@ -14,6 +15,7 @@ public class Register extends HttpServlet {
     public enum Status {
         SUCCESSFUL,
         DUPLICATE_USER,
+        PASSWORD_REQUIREMENTS,
         FAILURE
     }
 
@@ -36,18 +38,37 @@ public class Register extends HttpServlet {
 
         try {
             User registeredUser = UserService.Register(newUser);
-            session.setAttribute("register_status", Status.SUCCESSFUL);
+            setSuccess(session);
 
             response.sendRedirect("register.jsp");
-        } catch (Exception e) {
-            session.setAttribute("register_status", Status.FAILURE);
-            session.setAttribute("register_firstname", newUser.getFirstName());
-            session.setAttribute("register_lastname", newUser.getLastName());
-            session.setAttribute("register_username", newUser.getUsername());
-            session.setAttribute("register_email", newUser.getEmail());
-
+        } catch (UserService.DuplicateUsernameException e) {
+            setFailure(session, newUser, Status.DUPLICATE_USER);
+            response.sendRedirect("register.jsp");
+        } catch (PasswordService.PasswordRequirementsNotMetException p) {
+            setFailure(session, newUser, Status.PASSWORD_REQUIREMENTS);
+            response.sendRedirect("register.jsp");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            setFailure(session, newUser, Status.FAILURE);
             response.sendRedirect("register.jsp");
         }
 
+    }
+
+    private void setFailure(HttpSession session, NewUser newUser, Status status) {
+        session.setAttribute("register_status", status);
+        session.setAttribute("register_firstname", newUser.getFirstName());
+        session.setAttribute("register_lastname", newUser.getLastName());
+        session.setAttribute("register_username", newUser.getUsername());
+        session.setAttribute("register_email", newUser.getEmail());
+    }
+
+    private void setSuccess(HttpSession session) {
+        session.setAttribute("register_status", Status.SUCCESSFUL);
+        session.removeAttribute("register_firstname");
+        session.removeAttribute("register_lastname");
+        session.removeAttribute("register_username");
+        session.removeAttribute("register_email");
     }
 }
