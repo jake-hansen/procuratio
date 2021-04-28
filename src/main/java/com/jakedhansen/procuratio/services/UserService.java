@@ -100,4 +100,23 @@ public class UserService {
 
         return user;
     }
+
+    public static void UpdatePassword(User user, String newPassword) throws PasswordService.PasswordRequirementsNotMetException {
+        Session session = Database.getSession();
+        String encryptedPassword = PasswordService.hashPassword(newPassword);
+
+        String hql = "UPDATE User u set u.encryptedPassword = ?1 WHERE u.id = ?2";
+
+        Query query = session.createQuery(hql);
+        query.setParameter(1, encryptedPassword);
+        query.setParameter(2, user.getId());
+
+        try {
+            session.getTransaction().begin();
+            query.executeUpdate();
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
+    }
 }
