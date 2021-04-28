@@ -30,6 +30,11 @@
                         <c:if test="${sessionScope.login_status eq 'FAILURE'}">
                             <p class="text-danger">Failed to login</p>
                         </c:if>
+                        <c:if test="${sessionScope.login_status eq 'BAD_PASSWORD'}">
+                            <p class="text-danger">Incorrect username or password</p>
+                        </c:if>
+                        <c:remove var="login_status" scope="session"/>
+                        <c:remove var="login_username" scope="session"/>
                     </c:if>
                 </div>
             </div>
