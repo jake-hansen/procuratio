@@ -14,7 +14,12 @@
             </li>
             <c:if test="${not logged_in}">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/register.jsp">Register </a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/register.jsp">Register</a>
+                </li>
+            </c:if>
+            <c:if test="${logged_in}">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/profile.jsp">My Account</a>
                 </li>
             </c:if>
         </ul>
