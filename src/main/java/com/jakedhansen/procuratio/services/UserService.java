@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import com.jakedhansen.procuratio.database.Database;
 import org.hibernate.exception.ConstraintViolationException;
 
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
@@ -65,5 +67,37 @@ public class UserService {
         } else {
             return foundUser;
         }
+    }
+
+    public static User Update(User user) throws DuplicateUsernameException {
+        Session session = Database.getSession();
+
+        String hql = "UPDATE User u set u.username = ?1, u.firstname = ?2, u.lastname = ?3, u.email = ?4 WHERE u.id" +
+                "= ?5";
+
+        Query query = session.createQuery(hql);
+        query.setParameter(1, user.getUsername());
+        query.setParameter(2, user.getFirstname());
+        query.setParameter(3, user.getLastname());
+        query.setParameter(4, user.getEmail());
+        query.setParameter(5, user.getId());
+
+        try {
+            session.getTransaction().begin();
+            query.executeUpdate();
+            session.getTransaction().commit();
+        } catch (PersistenceException e) {
+            if (e.getCause().getClass().equals(ConstraintViolationException.class)) {
+                ConstraintViolationException c =(ConstraintViolationException) e.getCause();
+                if (c.getSQLException().getErrorCode() == 1062) {
+                    throw new DuplicateUsernameException(user.getUsername());
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return user;
     }
 }
