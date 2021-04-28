@@ -1,5 +1,8 @@
+#navbar {
+  margin-bottom: 1rem; }
+
 #main-container {
-  height: calc(100vh - 40px - 1rem);
+  height: calc(100vh - 40px - 2rem);
   box-sizing: border-box; }
 
 #main-container .column-sm {
