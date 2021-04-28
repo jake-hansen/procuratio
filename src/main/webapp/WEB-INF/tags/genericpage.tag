@@ -24,16 +24,20 @@
     const theme = window.matchMedia("(prefers-color-scheme: dark)");
     if (theme.matches) {
         document.getElementById("navbar").classList.add("bg-dark")
+        document.getElementById("navbar").classList.add("navbar-dark")
     } else {
         document.getElementById("navbar").classList.add("bg-light")
+        document.getElementById("navbar").classList.add("navbar-light")
     }
     theme.addEventListener("change", (e) => {
         if (e.matches) {
             themeConfig.setTheme('dark');
             document.getElementById("navbar").classList.replace("bg-light", "bg-dark");
+            document.getElementById("navbar").classList.replace("navbar-light", "navbar-dark")
         } else {
             themeConfig.setTheme('light');
             document.getElementById("navbar").classList.replace("bg-dark", "bg-light");
+            document.getElementById("navbar").classList.replace("navbar-dark", "navbar-light")
         }
     });
 </script>
