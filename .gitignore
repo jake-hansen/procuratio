@@ -105,3 +105,5 @@ https://github.com/github/gitignore/blob/master/Sass.gitignore
 
 /target
 *.iml
+
+database/mysql.conf

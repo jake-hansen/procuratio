@@ -1,0 +1,5 @@
+flyway.url=jdbc:mysql://database_url
+flyway.schemas=procuratio
+flyway.user=username
+flyway.password=password
+flyway.locations=filesystem:database/migrations
