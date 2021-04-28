@@ -9,7 +9,6 @@ import org.hibernate.exception.ConstraintViolationException;
 
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
@@ -20,8 +19,8 @@ public class UserService {
         }
     }
 
-    public static class IncorrectPasswordException extends Exception {
-        public IncorrectPasswordException(String s) {
+    public static class IncorrectCredentialsException extends Exception {
+        public IncorrectCredentialsException(String s) {
             super(s);
         }
     }
@@ -51,21 +50,23 @@ public class UserService {
         return saveUser;
     }
 
-    public static User Login(Credentials credentials) throws IncorrectPasswordException {
-        Session session = Database.getSession();
+    public static User Login(Credentials credentials) throws IncorrectCredentialsException {
 
-        String hql = "FROM User u where u.username = ?1";
+        try (Session session = Database.getSession()) {
+            String hql = "FROM User u where u.username = ?1";
+            Query query = session.createQuery(hql);
+            query.setParameter(1, credentials.getUsername());
+            List<User> userList = query.getResultList();
+            User foundUser = userList.get(0);
 
-        Query query = session.createQuery(hql);
-        query.setParameter(1, credentials.getUsername());
-        List<User> userList = query.getResultList();
-        User foundUser = userList.get(0);
-
-        boolean valid = PasswordService.checkPassword(credentials.getPassword(), foundUser.getEncryptedPassword());
-        if (!valid) {
-            throw new IncorrectPasswordException("incorrect password for user " + credentials.getUsername());
-        } else {
-            return foundUser;
+            boolean valid = PasswordService.checkPassword(credentials.getPassword(), foundUser.getEncryptedPassword());
+            if (!valid) {
+                throw new IncorrectCredentialsException("incorrect password for user " + credentials.getUsername());
+            } else {
+                return foundUser;
+            }
+        } catch (Exception e) {
+            throw new IncorrectCredentialsException(e.getMessage());
         }
     }
 

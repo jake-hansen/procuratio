@@ -8,7 +8,8 @@
                     <hr/>
                     <form action="${pageContext.request.contextPath}/updatepassword" method="post">
                         <h6>New Password</h6>
-                        <input class="form-control" type="password" id="password" name="password"/>
+                        <input class="form-control" type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"/>
+                        <small id="emailHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
                         <br/>
                         <button type="submit" class="btn btn-outline-success">Update Password</button>
                         <c:if test="${not empty sessionScope.password_reset_status}">

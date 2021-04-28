@@ -37,7 +37,7 @@ public class Login extends HttpServlet {
             session.setAttribute("user", registeredUser);
 
             response.sendRedirect("index.jsp");
-        } catch (UserService.IncorrectPasswordException i) {
+        } catch (UserService.IncorrectCredentialsException i) {
             setFailure(session, credentials, Status.BAD_PASSWORD);
             response.sendRedirect("login.jsp");
         }

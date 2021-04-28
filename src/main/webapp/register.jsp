@@ -16,29 +16,30 @@
             <div class="row">
                 <div class = "col">
                     <label for="firstname" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" value="<c:out value="${sessionScope.register_firstname}"/>"/>
+                    <input type="text" class="form-control" id="firstname" name="firstname" required value="<c:out value="${sessionScope.register_firstname}"/>"/>
                 </div>
                 <div class = "col">
                     <label for="lastname" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" value="<c:out value="${sessionScope.register_lastname}"/>">
+                    <input type="text" class="form-control" id="lastname" name="lastname" required value="<c:out value="${sessionScope.register_lastname}"/>">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" value="<c:out value="${sessionScope.register_username}"/>">
+                    <input type="text" class="form-control" id="username" name="username" required value="<c:out value="${sessionScope.register_username}"/>">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<c:out value="${sessionScope.register_email}"/>">
+                    <input type="email" class="form-control" id="email" name="email" required value="<c:out value="${sessionScope.register_email}"/>">
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" required name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                    <small id="emailHelp" class="form-text text-muted">Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters</small>
                 </div>
             </div>
             <div class="row">
