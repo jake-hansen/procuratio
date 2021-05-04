@@ -48,14 +48,16 @@ public class UpdateUser extends HttpServlet {
         String firstname = names[0];
         String lastname = names[1];
 
-        User user = (User) session.getAttribute("user");
-
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        user.setUsername(username);
-        user.setEmail(email);
-
         try {
+            Long userId = ((User) session.getAttribute("user")).getId();
+            User user = new User();
+            user.setId(userId);
+
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+            user.setUsername(username);
+            user.setEmail(email);
+
             User newUser = UserService.Update(user);
             session.setAttribute("user_update_status", Status.SUCCESSFUL);
             session.setAttribute("user", newUser);
