@@ -6,7 +6,7 @@
 
     <groupId>com.jakedhansen</groupId>
     <artifactId>procuratio</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>procuratio</name>
     <packaging>war</packaging>
 
