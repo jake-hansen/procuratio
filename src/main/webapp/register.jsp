@@ -1,8 +1,11 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="com.jakedhansen.procuratio.servlets.Register.Status"%>
 
+
+<c:if test="${not empty sessionScope.user}">
+    <c:redirect url="index.jsp"/>
+</c:if>
 
 <t:genericpage title="Register">
     <jsp:attribute name="header">

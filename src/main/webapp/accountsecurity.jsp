@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<c:if test="${empty sessionScope.user}">
+    <c:redirect url="login.jsp"/>
+</c:if>
+
 <t:accountsettings>
     <jsp:attribute name="settings">
         <h5>Account Security</h5>
