@@ -15,9 +15,7 @@
         </h1>
     </jsp:attribute>
     <jsp:attribute name="footer">
-        <p>footer</p>
     </jsp:attribute>
     <jsp:body>
-        <p>body</p>
     </jsp:body>
 </t:genericpage>
